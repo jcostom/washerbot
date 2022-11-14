@@ -21,7 +21,7 @@ MYTOKEN = os.getenv('MYTOKEN')
 DEBUG = int(os.getenv('DEBUG', 0))
 
 # Other Globals
-VER = "0.1"
+VER = "0.2"
 USER_AGENT = f"washerbot.py/{VER}"
 
 # Setup logger
@@ -69,6 +69,7 @@ def main() -> None:
     logger.info(f"Initiated: {USER_AGENT}")
 
     # Make sure plug is switched on
+    logger.info(f"Ensuring plug {PLUG_IP} is switched on.")
     asyncio.run(plug_on(PLUG_IP))
 
     is_running = 0

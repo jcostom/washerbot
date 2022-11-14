@@ -1,0 +1,22 @@
+---
+version: '3'
+
+services:
+  washermon:
+    image: ghcr.io/jcostom/washerbot:latest
+    container_name: washerbot
+    user: 1000:1000
+    environment:
+      - TZ=America/New_York
+      - PLUG_IP=ip.addr.of.plug-here
+      - CHATID='Your Telegram Chat ID'
+      - MYTOKEN='Your Telegram Bot Token'
+      - OFFPOWER=1.2
+      - ONPOWER=3.0
+    restart: unless-stopped
+    networks:
+      - containers
+        
+networks:
+  containers:
+    external: true
