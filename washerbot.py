@@ -21,7 +21,7 @@ MYTOKEN = os.getenv('MYTOKEN')
 DEBUG = int(os.getenv('DEBUG', 0))
 
 # Other Globals
-VER = "0.2"
+VER = "0.3"
 USER_AGENT = f"washerbot.py/{VER}"
 
 # Setup logger
@@ -78,19 +78,21 @@ def main() -> None:
         watts = asyncio.run(read_consumption(PLUG_IP))
         if is_running == 0:
             if watts > ONPOWER:
-                logger.info(f"Washer changed from stopped to running: {watts}")  # noqa: E501
+                logger.info(f"Transition from stopped to running: {watts}")
                 is_running = 1
             else:
-                logger.info(f"Washer remains stopped: {watts}")
+                if (DEBUG):
+                    logger.debug(f"Washer remains stopped: {watts}")
         else:
             if watts < OFFPOWER:
-                logger.info(f"Washer changed from running to stopped: {watts}")  # noqa: E501
+                logger.info(f"Transition from running to stopped: {watts}")
                 now = strftime("%B %d, %Y at %H:%M")
                 notification_text = f"Washer finished on {now}. Go switch out the laundry!"  # noqa: E501
                 send_notification(notification_text, CHATID, MYTOKEN)
                 is_running = 0
             else:
-                logger.info(f"Washer remains running: {watts}")
+                if (DEBUG):
+                    logger.debug(f"Washer remains running: {watts}")
 
         sleep(INTERVAL)
 
