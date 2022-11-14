@@ -1,0 +1,19 @@
+---
+version: '3'
+
+services:
+  influxdb:
+    image: influxdb:alpine
+    container_name: influxdb
+    ports:
+      - 8086:8086
+    volumes:
+      - /var/docks/influxdb/data:/var/lib/influxdb2
+      - /var/docks/influxdb/config:/etc/influxdb2
+    restart: unless-stopped
+    networks:
+      - containers
+    
+networks:
+  containers:
+    external: true
