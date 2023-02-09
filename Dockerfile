@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.11.1-slim-bullseye
 
 ARG TZ=America/New_York
 
