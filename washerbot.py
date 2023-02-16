@@ -21,7 +21,7 @@ MYTOKEN = os.getenv('MYTOKEN')
 DEBUG = int(os.getenv('DEBUG', 0))
 
 # Other Globals
-VER = "0.4.4"
+VER = "0.5"
 USER_AGENT = f"washerbot.py/{VER}"
 
 # Setup logger
@@ -40,9 +40,9 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
-def send_notification(msg: str, chat_id: int, token: str) -> None:
+async def send_notification(msg: str, chat_id: int, token: str) -> None:
     bot = telegram.Bot(token=token)
-    bot.sendMessage(chat_id=chat_id, text=msg)
+    await bot.send_message(chat_id=chat_id, text=msg)
     logger.info('Telegram Group Message Sent')
 
 
@@ -88,7 +88,7 @@ def main() -> None:
                 logger.info(f"Transition from running to stopped: {watts}")
                 now = strftime("%B %d, %Y at %H:%M")
                 notification_text = f"Washer finished on {now}. Go switch out the laundry!"  # noqa: E501
-                send_notification(notification_text, CHATID, MYTOKEN)
+                asyncio.run(send_notification(notification_text, CHATID, MYTOKEN))
                 is_running = 0
             else:
                 if (DEBUG):
