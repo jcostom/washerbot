@@ -21,7 +21,7 @@ MYTOKEN = os.getenv('MYTOKEN')
 DEBUG = int(os.getenv('DEBUG', 0))
 
 # Other Globals
-VER = "0.5.1"
+VER = "0.5.2"
 USER_AGENT = f"washerbot.py/{VER}"
 
 # Setup logger
@@ -88,7 +88,7 @@ def main() -> None:
                 logger.info(f"Transition from running to stopped: {watts}")
                 now = strftime("%B %d, %Y at %H:%M")
                 notification_text = f"Washer finished on {now}. Go switch out the laundry!"  # noqa: E501
-                asyncio.run(send_notification(notification_text, CHATID, MYTOKEN))
+                asyncio.run(send_notification(notification_text, CHATID, MYTOKEN))  # noqa: E501
                 is_running = 0
             else:
                 if (DEBUG):
