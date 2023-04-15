@@ -21,7 +21,7 @@ MYTOKEN = os.getenv('MYTOKEN')
 DEBUG = int(os.getenv('DEBUG', 0))
 
 # Other Globals
-VER = "0.5.2"
+VER = "0.5.4"
 USER_AGENT = f"washerbot.py/{VER}"
 
 # Setup logger
