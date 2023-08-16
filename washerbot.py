@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-import os
 import asyncio
 import logging
+import os
+import telegram
 from time import sleep, strftime
 from kasa import SmartPlug
-import telegram
 
 # --- To be passed in to container ---
 # Mandatory vars
@@ -21,7 +21,7 @@ MYTOKEN = os.getenv('MYTOKEN')
 DEBUG = int(os.getenv('DEBUG', 0))
 
 # Other Globals
-VER = "0.6.1"
+VER = "0.7"
 USER_AGENT = f"washerbot.py/{VER}"
 
 # Setup logger
@@ -73,8 +73,7 @@ def main() -> None:
                 logger.info(f"Transition from stopped to running: {watts}")
                 is_running = 1
             else:
-                if (DEBUG):
-                    logger.debug(f"Washer remains stopped: {watts}")
+                DEBUG and logger.debug(f"Washer remains stopped: {watts}")
         else:
             if watts < OFFPOWER:
                 logger.info(f"Transition from running to stopped: {watts}")
@@ -83,8 +82,7 @@ def main() -> None:
                 asyncio.run(send_notification(notification_text, CHATID, MYTOKEN))  # noqa: E501
                 is_running = 0
             else:
-                if (DEBUG):
-                    logger.debug(f"Washer remains running: {watts}")
+                DEBUG and logger.debug(f"Washer remains running: {watts}")
 
         sleep(INTERVAL)
 
