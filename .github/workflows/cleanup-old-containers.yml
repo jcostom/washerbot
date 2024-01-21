@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete old images
-        uses: actions/delete-package-versions@v5
+        uses: actions/delete-package-versions@v5.0.0
         with:
           package-name: ${{ github.event.repository.name }}
           package-type: container
