@@ -4,8 +4,7 @@ ARG TZ=America/New_York
 
 RUN apt update && apt -yq install gcc make
 RUN \
-    pip install python-kasa \
-    && pip install python-telegram-bot \
+    pip install requests python-kasa python-telegram-bot \
     && pip cache purge
 
 FROM python:3.12.1-slim-bookworm
