@@ -41,7 +41,7 @@ USE_ALEXA = int(os.getenv('USE_ALEXA', 0) or os.getenv('USEALEXA', 0))  # noqa E
 ALEXA_ACCESSCODE = os.getenv('ALEXA_ACCESSCODE')
 
 # Other Globals
-VER = "1.0.5"
+VER = "1.0.6"
 USER_AGENT = f"washerbot.py/{VER}"
 
 # Setup logger
