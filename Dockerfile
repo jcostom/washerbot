@@ -4,7 +4,7 @@ ARG TZ=America/New_York
 
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt -yq install gcc make
 RUN \
-    pip install requests python-kasa python-telegram-bot \
+    pip install requests python-kasa==0.6.2.1 python-telegram-bot \
     && pip cache purge
 
 FROM python:3.12.5-slim-bookworm
